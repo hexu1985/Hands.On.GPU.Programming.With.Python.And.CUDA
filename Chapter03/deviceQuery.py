@@ -31,8 +31,15 @@ for i in range(drv.Device.count()):
     # We must use a lookup table based on compute capability.
     # See the following:
     # http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities
-    
-    cuda_cores_per_mp = { 5.0 : 128, 5.1 : 128, 5.2 : 128, 6.0 : 64, 6.1 : 128, 6.2 : 128}[compute_capability]
+    # https://en.wikipedia.org/wiki/CUDA#References
+    # after 7.0: 64 cores per mp 
+    cuda_cores_per_mp = { 
+            1.0 : 8, 1.1 : 8, 1.2 : 8, 1.3 : 8,
+            2.0 : 32, 2.1 : 48, 
+            3.0 : 192, 3.2 : 192, 3.5 : 192, 3.7 : 192, 
+            5.0 : 128, 5.2 : 128, 5.3 : 128, 
+            6.0 : 64, 6.1 : 128, 6.2 : 128,
+            }.get(compute_capability, 64)
     
     print '\t ({}) Multiprocessors, ({}) CUDA Cores / Multiprocessor: {} CUDA Cores'.format(num_mp, cuda_cores_per_mp, num_mp*cuda_cores_per_mp)
     
