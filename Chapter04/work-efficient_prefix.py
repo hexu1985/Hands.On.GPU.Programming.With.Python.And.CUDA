@@ -107,6 +107,6 @@ if __name__ == '__main__':
     
     prefix_sum_gpu = efficient_prefix(testvec)
     
-    print "Does our work-efficient prefix work? {}".format(np.allclose(prefix_sum_gpu, prefix_sum))
+    print("Does our work-efficient prefix work? {}".format(np.allclose(prefix_sum_gpu, prefix_sum)))
     
     
